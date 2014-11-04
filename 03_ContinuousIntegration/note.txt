@@ -1,0 +1,21 @@
+
+*** get a list of installed package and search for jenkins (ignore case -i) 
+rpm -qa | grep -i jenkins
+
+*** another useful command
+xargs
+
+***
+Shell not Windows one..
+
+
+sudo su
+
+
+******
+1. remove the ruby folder
+2. rvm list, list all the ruby in the system
+3. rvm uninstall ruby...
+4. rvm reinstall ruby...
+5. bundle uninstall gem
+6. bundle install gem

@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = "11.6"
   config.vm.hostname = "ciserver"
   config.vm.network "private_network", type: "dhcp"
-  config.vm.network "forwarded_port", guest: 8080, host: 9080
+  config.vm.network "forwarded_port", guest: 8080, host: 9080  #8080 is the VM port, 9080 is our local port
   config.vm.synced_folder "../Installers", "/Installers"
   
   config.vm.provider :virtualbox do |vb|
