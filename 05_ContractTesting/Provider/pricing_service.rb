@@ -6,13 +6,14 @@ class CarPremiumCalculator
   def initialize
     @basePremium = 10
     @ageFactor = 1.2
+    @yearFactor = 0.5
     @genderFactors = {"male" => 1.25, "female" => 1.15}
     @stateFactors = {"nsw" => 1.1, "vic" => 1.2, "sa" => 1.3, "wa" => 1.4, "tas" => 1.5, "qld" => 1.6}
     @makeFactors = {"audi" => 1.0, "alfa" => 1.1, "bmw" => 1.2, "lexus" => 1.3, "toyota" => 1.4, "vw" => 1.5}
   end
 
-  def getPremiumForQuote(age, gender, state, make)
-    ('%.2f'%(@basePremium + @ageFactor*age*@genderFactors[gender]*@stateFactors[state]*@makeFactors[make]))
+  def getPremiumForQuote(age, gender, state, make, year)
+    ('%.2f'%(@basePremium + @ageFactor*age*@genderFactors[gender]*@stateFactors[state]*@makeFactors[make]*@yearFactor*year))
   end
   
 end
@@ -27,9 +28,10 @@ class App < Sinatra::Base
 		gender = params[:gender]
 		state = params[:state]
 		make = params[:make]
+		year = params[:year].to_f
 		calc = CarPremiumCalculator.new
 		
-		value = calc.getPremiumForQuote(age, gender, state, make)
+		value = calc.getPremiumForQuote(age, gender, state, make, year)
 
 		headers 'Content-Type' => 'application/json'
 		
